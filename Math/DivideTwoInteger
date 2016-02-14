@@ -1,0 +1,30 @@
+public class Solution {
+    public int divide(int dividend, int divisor) {
+        if (divisor==0) return Integer.MAX_VALUE;
+        int sign = -1;
+        if ((dividend>0 && divisor>0) || (dividend<0 && divisor<0)) sign=1;
+        if (dividend==0) return 0;
+        long absDividend=Math.abs((long)dividend);
+        long absDivisor=Math.abs((long)divisor);
+        long res=0;
+        while(absDividend>=absDivisor) {
+            long tmp = absDivisor;
+            long tmpRes = 1;
+            while (tmp<=absDividend) {
+                tmp<<=1;
+                tmpRes<<=1;
+            }
+            tmp>>=1;
+            tmpRes>>=1;
+            res+=tmpRes;
+            absDividend-=tmp;
+        }
+        
+        if (sign==-1) return (int)((long)sign*res);
+        if (res>Integer.MAX_VALUE) return Integer.MAX_VALUE;
+        return (int)res;
+        
+        
+        
+    }
+}
